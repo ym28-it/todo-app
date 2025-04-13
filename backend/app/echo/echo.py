@@ -10,5 +10,5 @@ def echo(app):
         return {"message": echo_request.message}
     
     @app.get("/echo")
-    async def get_echo(echo_request: EchoRequest):
-        return {"message": echo_request.message}
+    async def get_echo(message: str):
+        return {"message": message}

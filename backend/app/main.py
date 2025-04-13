@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from test.echo import echo
+from app.echo.echo import echo
+# パッケージのパスはuvicorn app.main:appでサーバーを起動しているため、
+# appディレクトリの親であるbackendディレクトリがルートとみなされる
+# そのためパッケージのパス指定はappから始めなければならない
+# この場合main.pyもappパッケージの一部とみなされるため、
+# appディレクトリ内にも__init__.pyが必要
 
 app = FastAPI()
 

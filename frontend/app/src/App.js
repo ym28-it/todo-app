@@ -28,7 +28,7 @@ function App() {
     try {
       const response = await fetch("http://localhost:8000/echo", {
         method: "POST",
-        header: {
+        headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({message: input })
