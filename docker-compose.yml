@@ -18,7 +18,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - ./backend/app:/app
+      - ./backend:/backend
+      - .dockervenv:/.venv
     ports:
       - "8000:8000"
     depends_on:
