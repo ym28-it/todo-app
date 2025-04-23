@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/tododb
+      - DATABASE_URL=postgresql+psycopg://user:password@db:5432/tododb
   db:
     image: postgres:16.4
     environment:

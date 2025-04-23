@@ -1,18 +1,22 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.future import select
+
 from app.models.user.user import User
 from app.schemas.user.user import UserCreate
-from fastapi import HTTPException
 
-def create_user(db: Session, user: UserCreate):
-    existing_email = db.query(User).filter(User.email == user.email).first()
+
+async def create_user(db: AsyncSession, user: UserCreate):
+    result = await db.execute(select(User).where(User.email == user.email))
+    existing_email = result.scalar_one_or_none()
     if existing_email:
-        raise HTTPException(status_code=400, detail="Email already registered")
+        return None
 
     db_user = User(name=user.name, email=user.email)
     db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
+    await db.commit()
+    await db.refresh(db_user)
     return db_user
 
-def get_user_by_id(db: Session, user_id: int):
-    return db.query(User).filter(User.id == user_id).first()
+async def get_user_by_id(db: AsyncSession, user_id: int):
+    result = await db.execute(select(User).where(User.id == user_id))
+    return result.scalar_one_or_none()
