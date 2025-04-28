@@ -12,9 +12,9 @@ async def create_user(db: AsyncSession, user: UserCreate):
         return None
 
     db_user = User(name=user.name, email=user.email)
-    db.add(db_user)
-    await db.commit()
-    await db.refresh(db_user)
+    db.add(db_user)             # データをメモリ上でセッションに登録　DBとの通信はしないから同期処理で十分
+    await db.commit()           # DBと通信し変更を反映（実行前ならロールバック可能）
+    await db.refresh(db_user)   # idなどのDB側で自動生成されるデータを受け取る（不要ならなくてもいい）
     return db_user
 
 async def get_user_by_id(db: AsyncSession, user_id: int):
