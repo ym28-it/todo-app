@@ -2,15 +2,25 @@ from typing import List, Tuple, Optional
 import uuid
 
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from sqlalchemy.engine import Result
 
 import app.models.task.list as list_model
 import app.schemas.task.list as list_schema
 
 
+async def get_list(db: AsyncSession, list_id: uuid.UUID) -> Optional[list_model.List]:
+    result: Result = await db.execute(
+        select(list_model.List).filter(list_model.List.list_id == list_id)
+    )
+    list: Optional[Tuple[list_model.List]] = result.first()
+    return list[0] if list is not None else None
+
+
 async def create_list(
-        db: AsyncSession, user_id: uuid.UUID, list_create: list_schema.ListCreate
+        db: AsyncSession, list_create: list_schema.ListCreate
 ) -> list_model.List:
-    list = list_model.List(user_id=user_id, **list_create.dict())
+    list = list_model.List(user_id=list_create.user_id, **list_create.dict())
 
     db.add(list)
     await db.commit()
