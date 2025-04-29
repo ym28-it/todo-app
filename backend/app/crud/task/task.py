@@ -34,7 +34,7 @@ async def create_task(
 #     return result.all()
 
 
-async def get_task(db: AsyncSession, task_id: int) -> Optional[task_model.Task]:
+async def get_task(db: AsyncSession, task_id: uuid.UUID) -> Optional[task_model.Task]:
     result: Result = await db.execute(
         select(task_model.Task).filter(task_model.Task.task_id == task_id)
     )

@@ -35,7 +35,7 @@ async def rename_task(
 
 
 @router.put("/tasks/{task_id}/explain", response_model=task_schema.TaskExplainResponse)
-async def update_explain_task(
+async def update_task_explain(
     task_id: uuid.UUID, task_body: task_schema.TaskExplainUpdate, db: AsyncSession = Depends(get_db)
 ):
     task = await task_crud.get_task(db, task_id=task_id)
