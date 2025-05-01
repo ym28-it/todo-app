@@ -9,4 +9,4 @@ class Done(Base):
 
     task_id = Column(Integer, ForeignKey("tasks.task_id"), primary_key=True)
 
-    task = relationship("Task", back_populates="done")
+    # task = relationship("Task", back_populates="done")

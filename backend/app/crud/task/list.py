@@ -9,18 +9,18 @@ import app.models.task.list as list_model
 import app.schemas.task.list as list_schema
 
 
-async def get_list(db: AsyncSession, list_id: uuid.UUID) -> Optional[list_model.List]:
+async def get_list(db: AsyncSession, list_id: uuid.UUID) -> list_model.List:
     result: Result = await db.execute(
         select(list_model.List).filter(list_model.List.list_id == list_id)
     )
-    list: Optional[Tuple[list_model.List]] = result.first()
-    return list[0] if list is not None else None
+    
+    return result.unique().scalar_one_or_none()
 
 
 async def create_list(
         db: AsyncSession, list_create: list_schema.ListCreate
 ) -> list_model.List:
-    list = list_model.List(user_id=list_create.user_id, **list_create.dict())
+    list = list_model.List(user_id=list_create.user_id, list_name=list_create.list_name)
 
     db.add(list)
     await db.commit()
@@ -48,6 +48,7 @@ async def update_list_explain(
     await db.commit()
     await db.refresh(original)
     return original
+
 
 async def delete_list(
         db: AsyncSession, original: list_model.List

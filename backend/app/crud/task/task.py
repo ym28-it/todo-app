@@ -13,7 +13,7 @@ import app.schemas.task.task as task_schema
 async def create_task(
         db: AsyncSession, task_create: task_schema.TaskCreate
 ) -> task_model.Task:
-    task = task_model.Task(list_id=task_create.list_id, **task_create.dict())
+    task = task_model.Task(list_id=task_create.list_id, task_name=task_create.task_name)
 
     db.add(task)
     await db.commit()

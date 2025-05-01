@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers.task import task, done
+from app.routers.task import task, list
 from app.routers.user import user
 # パッケージのパスはuvicorn app.main:appでサーバーを起動しているため、
 # appディレクトリの親であるbackendディレクトリがルートとみなされる
@@ -27,5 +27,5 @@ async def hello():
     return {"message": "hello world!"}
 
 app.include_router(task.router)
-app.include_router(done.router)
+app.include_router(list.router)
 app.include_router(user.router)

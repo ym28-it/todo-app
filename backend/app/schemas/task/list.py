@@ -1,6 +1,6 @@
 import uuid
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class ListBase(BaseModel):
@@ -16,24 +16,21 @@ class ListRename(ListBase):
     list_name: str = Field(None, example="新しい名前")
 
 
-class ListExplainUpdate(ListBase):
+class ListExplainUpdate(BaseModel):
     list_explain: str = Field(None, example="タスクの説明")
 
 
 class ListCreateResponse(ListCreate):
     list_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class ListRenameResponse(ListRename):
     list_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class ListExplainResponse(ListExplainUpdate):
     list_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

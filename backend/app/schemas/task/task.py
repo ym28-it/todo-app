@@ -1,6 +1,6 @@
 import uuid
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 
 class TaskBase(BaseModel):
@@ -9,52 +9,46 @@ class TaskBase(BaseModel):
 
 class TaskCreate(TaskBase):
     list_id: uuid.UUID
-    pass
 
 
 class TaskRename(TaskBase):
     task_name: str = Field(None, example="新規名")
 
 
-class TaskExplainUpdate(TaskBase):
+class TaskExplainUpdate(BaseModel):
     task_explain: str = Field(None, example="説明")
 
 
-class TaskIsDone(TaskBase):
+class TaskIsDone(BaseModel):
     is_done: bool
 
 
 class TaskCreateResponse(TaskCreate):
     task_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TaskRenameResponse(TaskRename):
     task_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TaskExplainResponse(TaskExplainUpdate):
     task_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TaskIsDoneResponse(TaskIsDone):
     task_id: uuid.UUID
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class Task(TaskBase):
     task_id: uuid.UUID
     done: bool = Field(False, description="完了フラグ")
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

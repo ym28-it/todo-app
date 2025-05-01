@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey, DataTime
+from sqlalchemy import Column, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import UUID
@@ -14,8 +14,8 @@ class List(Base):
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.user_id"), nullable=False)
     list_name = Column(String, nullable=False)
     list_explain = Column(String, nullable=True)
-    create_at = Column(DataTime, server_default=func.now())
-    updated_at = Column(DataTime, server_default=func.now(), onupdate=func.now())
+    create_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     user = relationship("User", back_populates="lists")
-    tasks = relationship("Task", back_populates="lists", cascade="all, delete", lazy="joined")  # 親テーブルlistを取得した時点で子テーブルtaskも取得
+    tasks = relationship("Task", back_populates="list", cascade="all, delete", lazy="joined")  # 親テーブルlistを取得した時点で子テーブルtaskも取得
