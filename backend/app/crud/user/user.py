@@ -5,12 +5,13 @@ from sqlalchemy.future import select
 
 import app.models.user.user as user_model
 import app.schemas.user.user as user_schema
+from app.utils.auth import hash_password
 
 
 async def create_user(
         db: AsyncSession, user: user_schema.UserCreate
 ) -> user_model.User:
-    db_user = user_model.User(name=user.name, email=user.email, password=user.password)
+    db_user = user_model.User(name=user.name, email=user.email, password=hash_password(user.password))
     db.add(db_user)             # データをメモリ上でセッションに登録　DBとの通信はしないから同期処理で十分
     await db.commit()           # DBと通信し変更を反映（実行前ならロールバック可能）
     await db.refresh(db_user)   # idなどのDB側で自動生成されるデータを受け取る（不要ならなくてもいい）

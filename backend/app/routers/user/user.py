@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 import app.schemas.user.user as user_schema
 import app.crud.user.user as user_crud
 from app.db.db import get_db
+from app.utils.auth import verify_password
 
 
 router = APIRouter()
@@ -30,6 +31,9 @@ async def read_user(user_id: uuid.UUID, db: AsyncSession = Depends(get_db)):
 
 @router.get("/users/login", response_model=user_schema.LogInResponse)
 async def log_in(login_info: user_schema.LogIn, db: AsyncSession = Depends(get_db)):
+    user = await user_crud.get_user_by_email(db, login_info.email)
+    if user is None or not verify_password(login_info.password, user.password):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
 
     return await user_crud.log_in(db, login_info)
 
