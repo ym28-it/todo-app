@@ -1,0 +1,107 @@
+
+# バックエンド - FastAPI
+
+このディレクトリは、FastAPIを使用して構築されたTodoアプリケーションのバックエンドを含みます。PostgreSQLを使用し、SQLAlchemyによる非同期ORM操作に対応しています。
+
+最低限の機能は実装済みです。
+
+## 📦 使用技術
+
+- FastAPI
+- SQLAlchemy（async）
+- Alembic（マイグレーション）
+- passlib（ハッシュ化認証）
+- PostgreSQL
+- poetry（パッケージ管理）
+
+## 📂 ディレクトリ構成
+
+TODO-APP\BACKEND
+├─.venv
+├─alembic
+│  ├─versions
+│  │  └─__pycache__
+│  └─__pycache__
+└─app
+    ├─db
+    │  └─__pycache__
+    ├─models
+    │  ├─task
+    │  │  └─__pycache__
+    │  ├─user
+    │  │  └─__pycache__
+    │  └─__pycache__
+    ├─routers
+    │  ├─task
+    │  │  └─__pycache__
+    │  └─user
+    │      └─__pycache__
+    ├─schemas
+    │  ├─task
+    │  │  └─__pycache__
+    │  └─user
+    │      └─__pycache__
+    ├─utils
+    │  └─__pycache__
+    └─__pycache__
+
+## 🔧 環境構築
+
+以下のコマンドで環境を構築・起動できます：
+
+```bash
+docker-compose up backend
+```
+
+http://localhost:8000/docs
+
+※ poetry や仮想環境の手動構築は不要です。
+
+## 主なAPIエンドポイント
+
+### ユーザー管理
+- `POST /users/create`：新規ユーザー作成
+- `POST /users/login`：ログイン処理
+- `GET /users/{user_id}`：ユーザー情報取得
+- `PUT /users/{user_id}/rename`：ユーザー名の変更
+- `DELETE /users/{user_id}`：ユーザー削除
+
+### リスト管理
+- `POST /lists/create`：リスト作成
+- `PUT /lists/{list_id}/rename`：リスト名変更
+- `PUT /lists/{list_id}/explain`：リストの説明変更
+- `DELETE /lists/{list_id}`：リスト削除
+
+### タスク管理
+- `POST /tasks/create`：タスク作成
+- `PUT /tasks/{task_id}/rename`：タスク名変更
+- `PUT /tasks/{task_id}/explain`：タスク説明変更
+- `PUT /tasks/{task_id}/done`：完了状態の更新
+- `DELETE /tasks/{task_id}`：タスク削除
+
+## 📄 自動ドキュメント
+
+FastAPIが提供するOpenAPIにより、以下でAPI仕様が確認できます：
+
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## 🧪 テスト（今後実装予定）
+
+- pytest による自動テスト
+- CIとの統合（GitHub Actions）
+
+## 🗃️ データベース接続情報
+
+```env
+DATABASE_URL=postgresql+psycopg://user:password@db:5432/tododb
+```
+
+環境変数はdocker-compose にて定義されています。
+
+## 📌 今後の機能追加候補
+
+- .envファイルで環境変数の一括管理
+- JWT認証の導入
+- ログ出力整備（ロガー）
+- APIテストの自動化
