@@ -16,6 +16,7 @@
 
 ## 📂 ディレクトリ構成
 
+```
 TODO-APP\BACKEND
 ├─.venv
 ├─alembic
@@ -44,6 +45,7 @@ TODO-APP\BACKEND
     ├─utils
     │  └─__pycache__
     └─__pycache__
+```
 
 ## 🔧 環境構築
 
