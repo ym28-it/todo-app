@@ -33,6 +33,7 @@
 
 ## 📂 ディレクトリ構成（予定）
 
+```
 TODO-APP\FRONTEND
 └─app
     ├─node_modules
@@ -53,7 +54,7 @@ TODO-APP\FRONTEND
         ├─routes
         └─store
             └─zustand
-
+```
 
 ## ▶️ 起動方法
 
