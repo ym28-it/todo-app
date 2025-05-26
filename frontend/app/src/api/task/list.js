@@ -1,40 +1,23 @@
-import client from "../client";
+import axiosInstance from "../axiosConfig";
 
-export const fetchCreateList = async (newListData) => {
-    try {
-        const res = await client.post("/lists/create", newListData);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const createList = async () => {
+    const res = await axiosInstance.post('/lists/create');
+    return res.data;
 }
 
-export const fetchRenameList = async (list_id, newListName) => {
-    try {
-        const res = await client.put(`/lists/${list_id}/rename`, newListName);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const renameList = async (list_id) => {
+    const res = await axiosInstance.put(`/lists/${list_id}/rename`);
+    return res.data;
 }
 
-export const fetchUpdateListExplain = async (list_id, listExplain) => {
-    try {
-        const res = await client.put(`/lists/${list_id}/explain`, listExplain);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+export const updateListExplain = async (list_id) => {
+    const res = await axiosInstance.put(`/lists/${list_id}/explain`);
+    return res.data;
 }
 
-export const fetchDeleteList = async (list_id) => {
-    try {
-        await client.delete(`/lists/${list_id}`);
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const deleteList = async (list_id) => {
+    await axiosInstance.delete(`/lists/${list_id}`);
 }

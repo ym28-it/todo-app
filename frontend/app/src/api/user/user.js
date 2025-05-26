@@ -1,50 +1,34 @@
-import client from "../client";
+import axiosInstance from "../axiosConfig";
 
-export const fetchCreateUser = async (newUserData) => {
-    try {
-        const res = await client.post("/users/create", newUserData);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const logIn = async () => {
+    
 }
 
-export const fetchReadUser = async (user_id) => {
-    try {
-        const res = await client.get(`/users/${user_id}`);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const createUser = async () => {
+    const res = await axiosInstance.post('/users/create');
+    return res.data;
 }
 
-export const fetchLogin = async (loginData) => {
-    try {
-        const res = await client.post("/users/login", loginData);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const readUser = async (user_id) => {
+    const res = await axiosInstance.get(`/users/${user_id}`);
+    return res.data;
 }
 
-export const fetchRenameUserName = async (user_id, newUserName) => {
-    try {
-        const res = await client.put(`/users/${user_id}/rename`, newUserName);
-        return res.data;
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+
+export const renameList = async (list_id) => {
+    const res = await axiosInstance.put(`/lists/${list_id}/rename`);
+    return res.data;
 }
 
-export const fetchDeleteUser = async (user_id) => {
-    try {
-        await client.delete(`/users/${user_id}`);
-    } catch (e) {
-        console.error(e);
-        throw e;
-    }
+export const updateListExplain = async (list_id) => {
+    const res = await axiosInstance.put(`/lists/${list_id}/explain`);
+    return res.data;
+}
+
+
+export const deleteList = async (list_id) => {
+    await axiosInstance.delete(`/lists/${list_id}`);
 }
