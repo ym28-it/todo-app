@@ -2,7 +2,8 @@ import axiosInstance from "../axiosConfig";
 
 
 export const logIn = async () => {
-    
+    const res = await axiosInstance.post('/users/login');
+    return res.data;
 }
 
 
@@ -18,17 +19,12 @@ export const readUser = async (user_id) => {
 }
 
 
-export const renameList = async (list_id) => {
-    const res = await axiosInstance.put(`/lists/${list_id}/rename`);
-    return res.data;
-}
-
-export const updateListExplain = async (list_id) => {
-    const res = await axiosInstance.put(`/lists/${list_id}/explain`);
+export const renameUserName = async (user_id) => {
+    const res = await axiosInstance.put(`/users/${user_id}/rename`);
     return res.data;
 }
 
 
-export const deleteList = async (list_id) => {
-    await axiosInstance.delete(`/lists/${list_id}`);
+export const deleteUser = async (user_id) => {
+    await axiosInstance.delete(`/users/${user_id}`);
 }
