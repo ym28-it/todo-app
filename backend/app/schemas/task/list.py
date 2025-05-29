@@ -9,7 +9,6 @@ class ListBase(BaseModel):
 
 class ListCreate(ListBase):
     user_id: uuid.UUID
-    pass
 
 
 class ListRename(ListBase):

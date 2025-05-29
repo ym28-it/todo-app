@@ -1,14 +1,21 @@
 import axiosInstance from "../axiosConfig";
 
 
-export const logIn = async () => {
-    const res = await axiosInstance.post('/users/login');
+export const logIn = async (email, password) => {
+    const res = await axiosInstance.post('/users/login', {
+        email,
+        password
+    });
     return res.data;
 }
 
 
-export const createUser = async () => {
-    const res = await axiosInstance.post('/users/create');
+export const createUser = async (user_name, email, password) => {
+    const res = await axiosInstance.post('/users/create', {
+        user_name,
+        email,
+        password
+    });
     return res.data;
 }
 
@@ -19,8 +26,8 @@ export const readUser = async (user_id) => {
 }
 
 
-export const renameUserName = async (user_id) => {
-    const res = await axiosInstance.put(`/users/${user_id}/rename`);
+export const renameUserName = async (user_id, user_name) => {
+    const res = await axiosInstance.put(`/users/${user_id}/rename`, { user_name });
     return res.data;
 }
 
