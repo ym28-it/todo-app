@@ -1,12 +1,12 @@
 
 
-export function Task() {
+export function Task({ task }) {
     return (
         <li>
-            <TaskName />
-            <TaskExplain/>
-            <TaskStatus/>
-            <TaskDelete/>
+            <TaskName task={task}/>
+            <TaskExplain task={task}/>
+            <TaskStatus task={task}/>
+            <TaskDelete task={task}/>
         </li>
     )
 }

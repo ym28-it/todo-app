@@ -6,17 +6,27 @@ import { updateIsDone } from "../../../api/task/task.js";
 export function TaskStatus() {
     const [isDone, setIsDone] = useState(false);
 
-    // Todo: default isDone value most be equal to value fetched by updateIsDone firstly.
-    // DB driven
-    useEffect(() => {
-        updateIsDone(isDone);
-    }, [isDone]);
+    const handleToggleStatus = async () => {
+        try {
+            const updatedTask = await updateIsDone(isDone);
+            setIsDone(updatedTask.isDone);
+        } catch (error) {
+            console.error("Error updating task status:", error);
+            // Optionally, you can show an error message to the user
+        }
+    }
 
 
     return (
         <div>
-            <p>Status:{ isDone ? 'Completed' : 'In Progress'}</p>
-            <button onClick={() => setIsDone(!isDone)}>{ isDone ? 'Yet' : 'Done'}</button>
+            <p>
+                Status: <span style={{ color: isDone ? 'green' : 'red' }}>
+                    {isDone ? 'Done' : 'Not Done'}
+                </span>
+            </p>
+            <button onClick={handleToggleStatus}>
+                { isDone ? 'Mark as Incomplete' : 'Mark as Done'}
+            </button>
         </div>
-    )
+    );
 }

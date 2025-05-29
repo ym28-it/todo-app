@@ -1,13 +1,42 @@
+import { useState } from "react";
+import { renameTask } from "../../../api/task/task";
 
 
+export function TaskName({task}) {
+    const [editing, setEditing] = useState(false);
+    const [newName, setNewName] = useState(task.name);
+    const [currentName, setCurrentName] = useState(task.name);
 
-export function TaskName() {
-
+    const handleRename = async () => {
+        try {
+            const updatedTask = await renameTask(task.id, newName);
+            setCurrentName(updatedTask.name);
+            setEditing(false);
+        } catch (error) {
+            console.error("Error renaming task:", error);
+            // Optionally, you can show an error message to the user
+        }
+    }
+    // This component allows the user to rename a task.
 
     return (
-        <div>
-            <p>Task Name</p>
-            <button>Rename</button>
+        <div >
+            {editing ? (
+                <div>
+                    <input
+                        type="text"
+                        value={newName}
+                        onChange={(e) => setNewName(e.target.value)}
+                    />
+                    <button onClick={handleRename}>Save</button>
+                    <button onClick={() => setEditing(false)}>Cancel</button>
+                </div>
+            ) : (
+                <div>
+                    <h3>{currentName}</h3>
+                    <button onClick={() => setEditing(true)}>Rename</button>
+                </div>
+            )}
         </div>
-    )
+    );
 }
