@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { updateIsDone } from "../../../api/task/task.js";
 
 
-export function TaskStatus() {
+export function TaskStatus({ task }) {
     const [isDone, setIsDone] = useState(false);
 
     const handleToggleStatus = async () => {
         try {
-            const updatedTask = await updateIsDone(isDone);
+            const updatedTask = await updateIsDone(task.id, !isDone);
             setIsDone(updatedTask.isDone);
         } catch (error) {
             console.error("Error updating task status:", error);

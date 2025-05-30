@@ -8,7 +8,7 @@ export function TaskDelete({ task, onDelete }) {
             return; // User cancelled the deletion
         }
         try {
-            await deleteTask();
+            await deleteTask(task.id);
             if (onDelete) {
                 onDelete(task.id); // Call the onDelete callback to update the UI
             }
