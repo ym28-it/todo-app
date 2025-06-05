@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { renameTask } from "../../../api/task/task";
+import { renameTask } from "../../../api/task/task.js";
 
 
 export function TaskName({task}) {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { updateTaskListExplain } from "../../../api/task/taskList";
+import { updateListExplain } from "../../../api/task/list.js";
 
 
 export function TaskListExplain({ taskList }) {
@@ -8,7 +8,7 @@ export function TaskListExplain({ taskList }) {
 
     const handleSaveExplain = async () => {
         try {
-            const updatedTaskList = await updateTaskListExplain(taskList.id, explain);
+            const updatedTaskList = await updateListExplain(taskList.id, explain);
             setExplain(updatedTaskList.explain);
             setEditing(false);
         } catch (error) {

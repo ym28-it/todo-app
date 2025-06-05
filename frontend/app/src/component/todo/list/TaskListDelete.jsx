@@ -1,4 +1,4 @@
-import { deleteTaskList } from "../../../api/task/taskList";
+import { deleteList } from "../../../api/task/list.js";
 
 export function TaskListDelete({ taskList, onDelete }) {
     const handleDelete = async () => {
@@ -6,7 +6,8 @@ export function TaskListDelete({ taskList, onDelete }) {
             return; // User cancelled the deletion
         }
         try {
-            await deleteTaskList();
+            await deleteList(taskList.id); // Call the API to delete the task list
+            console.log("Task list deleted successfully:", taskList.id);
             if (onDelete) {
                 onDelete(taskList.id); // Call the onDelete callback to update the UI
             }

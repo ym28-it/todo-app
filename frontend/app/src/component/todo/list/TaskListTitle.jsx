@@ -1,6 +1,6 @@
 // this component controls TaskListName only
 import { useState } from "react";
-import { updateTaskListName } from "../../../api/task/taskList";
+import { renameList } from "../../../api/task/list.js";
 
 
 export function TaskListTitle({ taskList }) {
@@ -10,7 +10,7 @@ export function TaskListTitle({ taskList }) {
 
     const handleRename = async () => {
         try {
-            const updatedTaskList = await updateTaskListName(taskList.id, newName);
+            const updatedTaskList = await renameList(taskList.id, newName);
             setCurrentName(updatedTaskList.name);
             setEditing(false);
         } catch (error) {

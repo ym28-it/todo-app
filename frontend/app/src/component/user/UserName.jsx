@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { renameUserName } from "../../api/user/user";
+import { renameUserName } from "../../api/user/user.js";
 
 export function UserName({ user, onUpdate }) {
     const [newName, setNewName] = useState(user.name);

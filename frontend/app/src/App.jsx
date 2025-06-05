@@ -6,6 +6,7 @@ import './App.css'
 import { AppRouter } from './router/AppRouter';
 
 function App() {
+  console.log('App component rendered');
 
   return (
     <BrowserRouter>
