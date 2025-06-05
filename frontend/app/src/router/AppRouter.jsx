@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { Home } from '../component/Home';
-import { Todo } from '../component/todo';
-import { User } from '../component/User';
+import { Todo } from '../component/todo/Todo';
+import { User } from '../component/user/User';
 import { Login } from '../component/auth/Login';
 import { SignUp } from '../component/auth/SignUp';
 

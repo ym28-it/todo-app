@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { logIn } from "../../api/user/user";
 
 
@@ -8,12 +8,16 @@ export function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const response = await logIn(username, password);
             // Handle successful login, e.g., redirect or show a success message
             console.log("Login successful:", response);
+            // go to todo page
+            navigate('/todo', {state: { user: response }});
         } catch (err) {
             console.error("Login error:", err);
         }
