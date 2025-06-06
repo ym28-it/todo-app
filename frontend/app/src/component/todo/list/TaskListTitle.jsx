@@ -5,13 +5,13 @@ import { renameList } from "../../../api/task/list.js";
 
 export function TaskListTitle({ taskList }) {
     const [editing, setEditing] = useState(false);
-    const [newName, setNewName] = useState(taskList.name);
-    const [currentName, setCurrentName] = useState(taskList.name);
+    const [newName, setNewName] = useState(taskList.list_name);
+    const [currentName, setCurrentName] = useState(taskList.list_name);
 
     const handleRename = async () => {
         try {
-            const updatedTaskList = await renameList(taskList.id, newName);
-            setCurrentName(updatedTaskList.name);
+            const updatedTaskList = await renameList(taskList.list_id, newName);
+            setCurrentName(updatedTaskList.list_name);
             setEditing(false);
         } catch (error) {
             console.error("Error renaming task list:", error);

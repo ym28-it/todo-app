@@ -10,6 +10,7 @@ export function AddTaskList({ userId, onAdd }) {
         if (!taskListName.trim()) return; // Prevent adding empty task lists
         try {
             const newTaskList = await createList(userId, taskListName);
+            console.log("Task list created successfully:", newTaskList);
             onAdd(newTaskList); // Notify parent component about the new task list
             setTaskListName(""); // Clear input field
         } catch (error) {
