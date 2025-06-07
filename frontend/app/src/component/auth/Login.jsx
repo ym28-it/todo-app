@@ -5,7 +5,7 @@ import { logIn } from "../../api/user/user";
 
 export function Login() {
     
-    const [username, setUsername] = useState('');
+    const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ export function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await logIn(username, password);
+            const response = await logIn(userEmail, password);
             // Handle successful login, e.g., redirect or show a success message
             console.log("Login successful:", response);
             // go to todo page
@@ -29,8 +29,8 @@ export function Login() {
             <h2>Login</h2>
             <form action="/login" method="POST">
                 <div>
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)}  required />
+                    <label htmlFor="userEmail">UserEmail:</label>
+                    <input type="text" id="userEmail" name="userEmail" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}  required />
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>

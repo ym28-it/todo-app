@@ -11,6 +11,8 @@ export function TaskListTitle({ taskList }) {
     const handleRename = async () => {
         try {
             const updatedTaskList = await renameList(taskList.list_id, newName);
+            console.log("Task list renamed successfully:", updatedTaskList);
+            // Update the current name to reflect the new name
             setCurrentName(updatedTaskList.list_name);
             setEditing(false);
         } catch (error) {

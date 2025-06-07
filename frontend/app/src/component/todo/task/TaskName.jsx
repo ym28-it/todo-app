@@ -4,13 +4,13 @@ import { renameTask } from "../../../api/task/task.js";
 
 export function TaskName({task}) {
     const [editing, setEditing] = useState(false);
-    const [newName, setNewName] = useState(task.name);
-    const [currentName, setCurrentName] = useState(task.name);
+    const [newName, setNewName] = useState(task.task_name);
+    const [currentName, setCurrentName] = useState(task.task_name);
 
     const handleRename = async () => {
         try {
-            const updatedTask = await renameTask(task.id, newName);
-            setCurrentName(updatedTask.name);
+            const updatedTask = await renameTask(task.task_id, newName);
+            setCurrentName(updatedTask.task_name);
             setEditing(false);
         } catch (error) {
             console.error("Error renaming task:", error);

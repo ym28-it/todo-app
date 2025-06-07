@@ -6,10 +6,10 @@ export function TaskListDelete({ taskList, onDelete }) {
             return; // User cancelled the deletion
         }
         try {
-            await deleteList(taskList.id); // Call the API to delete the task list
-            console.log("Task list deleted successfully:", taskList.id);
+            await deleteList(taskList.list_id); // Call the API to delete the task list
+            console.log("Task list deleted successfully:", taskList.list_id);
             if (onDelete) {
-                onDelete(taskList.id); // Call the onDelete callback to update the UI
+                onDelete(taskList.list_id); // Call the onDelete callback to update the UI
             }
             // Optionally, you can show a success message or update the UI
         } catch (error) {

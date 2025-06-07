@@ -1,10 +1,10 @@
 import axiosInstance from "../axiosConfig";
 
 
-export const createTask = async (list_id, task_name="") => {
-    const res = await axiosInstance.get('/tasks/create', {
-        list_id,
-        task_name
+export const createTask = async (list_id, task_name) => {
+    const res = await axiosInstance.post('/tasks/create', {
+        task_name,
+        list_id
     });
     return res.data;
 }

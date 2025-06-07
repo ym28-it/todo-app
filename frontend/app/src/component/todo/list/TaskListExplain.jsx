@@ -8,8 +8,10 @@ export function TaskListExplain({ taskList }) {
 
     const handleSaveExplain = async () => {
         try {
-            const updatedTaskList = await updateListExplain(taskList.id, explain);
-            setExplain(updatedTaskList.explain);
+            const updatedTaskList = await updateListExplain(taskList.list_id, explain);
+            console.log("Updated task list explain:", updatedTaskList);
+            // Update the local state with the new explain
+            setExplain(updatedTaskList.list_explain);
             setEditing(false);
         } catch (error) {
             console.error("Error updating task list explain:", error);
