@@ -2,14 +2,14 @@ import { useState } from "react";
 
 import { renameUserName } from "../../api/user/user.js";
 
-export function UserName({ user, onUpdate }) {
-    const [newName, setNewName] = useState(user.name);
+export function UserNameUpdate({ user, onUpdateUserName }) {
+    const [newName, setNewName] = useState(user.user_name);
     const [isEditing, setIsEditing] = useState(false);
 
     const handleRename = async () => {
         try {
-            const updatedUser = await renameUserName(user.id, newName);
-            onUpdate(updatedUser);
+            const updatedUser = await renameUserName(user.user_id, newName);
+            onUpdateUserName(updatedUser);
             setIsEditing(false);
         } catch (error) {
             console.error("Error renaming user:", error);
@@ -19,7 +19,6 @@ export function UserName({ user, onUpdate }) {
 
     return (
         <div>
-            <h2>User Name</h2>
             {isEditing ? (
                 <div>
                     <input
@@ -32,7 +31,6 @@ export function UserName({ user, onUpdate }) {
                 </div>
             ) : (
                 <div>
-                    <p>{user.name}</p>
                     <button onClick={() => setIsEditing(true)}>Edit Name</button>
                 </div>
             )}

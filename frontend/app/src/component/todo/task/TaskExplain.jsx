@@ -3,13 +3,15 @@ import { updateTaskExplain } from "../../../api/task/task.js";
 
 
 export function TaskExplain({ task }) {
-    const [explain, setExplain] = useState(task.explain || "");
+    const [explain, setExplain] = useState(task.task_explain || "");
     const [editing, setEditing] = useState(false);
 
     const handleSaveExplain = async () => {
         try {
-            const updatedTask = await updateTaskExplain(task.id, explain);
-            setExplain(updatedTask.explain);
+            const updatedTask = await updateTaskExplain(task.task_id, explain);
+            console.log("Updated task explain:", updatedTask);
+            // Update the local state with the new explain
+            setExplain(updatedTask.task_explain);
             setEditing(false);
         } catch (error) {
             console.error("Error updating task explain:", error);

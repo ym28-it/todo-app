@@ -3,7 +3,7 @@ import { updateListExplain } from "../../../api/task/list.js";
 
 
 export function TaskListExplain({ taskList }) {
-    const [explain, setExplain] = useState(taskList.explain || "");
+    const [explain, setExplain] = useState(taskList.list_explain || "");
     const [editing, setEditing] = useState(false);
 
     const handleSaveExplain = async () => {

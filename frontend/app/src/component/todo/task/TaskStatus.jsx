@@ -8,8 +8,8 @@ export function TaskStatus({ task }) {
 
     const handleToggleStatus = async () => {
         try {
-            const updatedTask = await updateIsDone(task.id, !isDone);
-            setIsDone(updatedTask.isDone);
+            const updatedTask = await updateIsDone(task.task_id, !isDone);
+            setIsDone(updatedTask.is_done);
         } catch (error) {
             console.error("Error updating task status:", error);
             // Optionally, you can show an error message to the user
