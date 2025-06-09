@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { AddTaskList } from "./list/AddTaskList.jsx";
 import { TaskList } from "./list/TaskList.jsx";
 
+import { getLists } from "../../api/task/list.js";
+
 
 export function Todo() {
     const [taskLists, setTaskLists] = useState([]); // Initialize task lists state
-
     const location = useLocation();
     const user = location.state?.user; // Get user from location state
     if (!user) {
@@ -15,6 +16,20 @@ export function Todo() {
     }
 
     console.log("Todo component rendered with user:", user);
+
+    useEffect(() => {
+        const fetchTaskLists = async () => {
+            try {
+                const lists = await getLists(user.user_id);
+                console.log("Fetched task lists:", lists);
+                setTaskLists(lists);
+            } catch (error) {
+                console.error("Error fetching task lists:", error);
+            }
+        }
+
+        fetchTaskLists();
+    }, [])
 
     const handleAddTaskList = (newTaskList) => {
         setTaskLists((prevLists) => [...prevLists, newTaskList]); // Update task lists state with the new task list

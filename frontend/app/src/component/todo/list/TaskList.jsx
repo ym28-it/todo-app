@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TaskListTitle } from "./TaskListTitle.jsx";
 import { TaskListExplain } from "./TaskListExplain.jsx";
 import { TaskListDelete } from "./TaskListDelete.jsx";
 import { AddTask } from "../task/AddTask.jsx";
 import { Task } from "../task/Task.jsx";
 
+import { getTasks } from "../../../api/task/task.js";
+
 export function TaskList({ taskList, onDeleteTaskList }) {
-    const [tasks, setTasks] = useState(taskList.tasks || []); // Initialize tasks state
+    const [tasks, setTasks] = useState([]); // Initialize tasks state
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const tasksData = await getTasks(taskList.list_id);
+                console.log('Fetched tasks:', tasksData);
+                setTasks(tasksData);
+            } catch (error) {
+                console.error('Error fetching tasks:', error);
+            }
+        }
+        fetchTasks();
+    }, []);
 
     const handleAddTask = (newTask) => {
         setTasks((prevTasks) => [...prevTasks, newTask]); // Update tasks state with the new task

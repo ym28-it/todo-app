@@ -23,6 +23,18 @@ class TaskIsDone(BaseModel):
     is_done: bool
 
 
+
+
+
+class TasksGetResponse(BaseModel):
+    task_id: uuid.UUID
+    task_name: str
+    task_explain: Optional[str]     # use Optional to allow Null
+    is_done: bool
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class TaskCreateResponse(TaskCreate):
     task_id: uuid.UUID
 

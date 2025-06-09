@@ -11,9 +11,15 @@ from app.db.db import get_db
 router = APIRouter()
 
 
-# @router.get("/tasks", response_model=List[task_schema.Task])
-# async def list_tasks(db: AsyncSession = Depends(get_db)):
-#     return await task_crud.get_tasks_with_done(db)
+@router.get("/tasks/{list_id}", response_model=List[task_schema.TasksGetResponse])
+async def get_tasks_by_list_id(
+    list_id: uuid.UUID, db: AsyncSession = Depends(get_db)
+):
+    tasks = await task_crud.get_tasks_by_list_id(db, list_id=list_id)
+    if not tasks:
+        raise HTTPException(status_code=404, detail="No tasks found for this list")
+    
+    return tasks
 
 
 @router.post("/tasks/create", response_model=task_schema.TaskCreateResponse)

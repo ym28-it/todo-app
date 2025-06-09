@@ -17,6 +17,14 @@ async def get_list(db: AsyncSession, list_id: uuid.UUID) -> list_model.List:
     return result.unique().scalar_one_or_none()
 
 
+async def get_lists_by_user_id(db: AsyncSession, user_id: uuid.UUID) -> List[list_model.List]:
+    result: Result = await db.execute(
+        select(list_model.List).filter(list_model.List.user_id == user_id)
+    )
+    
+    return result.unique().scalars().all()
+
+
 async def create_list(
         db: AsyncSession, list_create: list_schema.ListCreate
 ) -> list_model.List:

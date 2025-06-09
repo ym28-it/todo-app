@@ -1,6 +1,12 @@
 import axiosInstance from "../axiosConfig";
 
 
+export const getLists = async (user_id) => {
+    const res = await axiosInstance.get(`/lists/${user_id}`);
+    return res.data;
+}
+
+
 export const createList = async (user_id, list_name="") => {
     const res = await axiosInstance.post('/lists/create', {
         user_id,

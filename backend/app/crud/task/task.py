@@ -10,6 +10,15 @@ import app.models.task.task as task_model
 import app.schemas.task.task as task_schema
 
 
+async def get_tasks_by_list_id(
+        db: AsyncSession, list_id: uuid.UUID
+) -> List[task_model.Task]:
+    result: Result = await db.execute(
+        select(task_model.Task).filter(task_model.Task.list_id == list_id)
+    )
+    return result.unique().scalars().all()
+
+
 async def create_task(
         db: AsyncSession, task_create: task_schema.TaskCreate
 ) -> task_model.Task:
