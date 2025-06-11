@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { UserNameUpdate } from "./UserNameUpdate.jsx";
 // import { UserEmail } from "./UserEmail.jsx";
 // import { UserPassword } from "./UserPassword.jsx";
+import { DeleteUser } from "./DeleteUser.jsx";
 import { readUser } from "../../api/user/user.js";
 
 
@@ -50,6 +51,7 @@ export function User() {
             <UserNameUpdate user={userFromLocation} onUpdateUserName={onUpdateUserName} />
             {/* <UserEmail/>
             <UserPassword/> */}
+            <DeleteUser user={userFromLocation} />
         </div>
 
     )
