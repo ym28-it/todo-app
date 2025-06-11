@@ -3,7 +3,7 @@ import { useState } from "react";
 import { renameUserName } from "../../api/user/user.js";
 
 export function UserNameUpdate({ user, onUpdateUserName }) {
-    const [newName, setNewName] = useState(user.user_name);
+    const [newName, setNewName] = useState(user.user_name ?? '');
     const [isEditing, setIsEditing] = useState(false);
 
     const handleRename = async () => {

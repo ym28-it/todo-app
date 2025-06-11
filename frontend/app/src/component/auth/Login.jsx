@@ -7,6 +7,7 @@ export function Login() {
     
     const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     const navigate = useNavigate();
 
@@ -16,10 +17,12 @@ export function Login() {
             const response = await logIn(userEmail, password);
             // Handle successful login, e.g., redirect or show a success message
             console.log("Login successful:", response);
+            setLoginError('');
             // go to todo page
             navigate('/todo', {state: { user: response }});
         } catch (err) {
             console.error("Login error:", err);
+            setLoginError(err.message);
         }
     }
 
@@ -27,7 +30,8 @@ export function Login() {
     return (
         <div>
             <h2>Login</h2>
-            <form action="/login" method="POST">
+            {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+            <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="userEmail">UserEmail:</label>
                     <input type="text" id="userEmail" name="userEmail" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}  required />
@@ -36,7 +40,7 @@ export function Login() {
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <button type="submit" onClick={handleLogin}>Login</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     )

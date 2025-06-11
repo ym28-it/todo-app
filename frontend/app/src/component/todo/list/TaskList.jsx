@@ -18,10 +18,11 @@ export function TaskList({ taskList, onDeleteTaskList }) {
                 setTasks(tasksData);
             } catch (error) {
                 console.error('Error fetching tasks:', error);
+                // when tasklist is empty, backend return error. But No problem
             }
         }
         fetchTasks();
-    }, []);
+    }, [taskList.list_id]);
 
     const handleAddTask = (newTask) => {
         setTasks((prevTasks) => [...prevTasks, newTask]); // Update tasks state with the new task

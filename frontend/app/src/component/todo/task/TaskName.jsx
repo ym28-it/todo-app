@@ -29,14 +29,20 @@ export function TaskName({task}) {
                         onChange={(e) => setNewName(e.target.value)}
                     />
                     <button onClick={handleRename}>Save</button>
-                    <button onClick={() => setEditing(false)}>Cancel</button>
+                    <button onClick={() => {
+                        setEditing(false);
+                        setNewName(currentName || '');
+                    }}>Cancel</button>
                 </div>
             ) : (
                 <div>
                     <h3>{currentName}</h3>
-                    <button onClick={() => setEditing(true)}>Rename</button>
+                    <button onClick={() => {
+                        setEditing(true);
+                        setNewName(currentName || '');
+                    }}>Rename</button>
                 </div>
             )}
         </div>
-    );
+    )
 }

@@ -3,15 +3,16 @@ import { updateListExplain } from "../../../api/task/list.js";
 
 
 export function TaskListExplain({ taskList }) {
-    const [explain, setExplain] = useState(taskList.list_explain || "");
+    const [currentExplain, setCurrentExplain] = useState(taskList.list_explain || "");
+    const [newExplain, setNewExplain] = useState('');
     const [editing, setEditing] = useState(false);
 
     const handleSaveExplain = async () => {
         try {
-            const updatedTaskList = await updateListExplain(taskList.list_id, explain);
-            console.log("Updated task list explain:", updatedTaskList);
+            const updatedTaskListExplain = await updateListExplain(taskList.list_id, newExplain);
+            console.log("Updated task list explain:", updatedTaskListExplain);
             // Update the local state with the new explain
-            setExplain(updatedTaskList.list_explain);
+            setCurrentExplain(updatedTaskListExplain.list_explain);
             setEditing(false);
         } catch (error) {
             console.error("Error updating task list explain:", error);
@@ -25,18 +26,24 @@ export function TaskListExplain({ taskList }) {
             {editing ? (
                 <div>
                     <textarea
-                        value={explain}
-                        onChange={(e) => setExplain(e.target.value)}
+                        value={newExplain}
+                        onChange={(e) => setNewExplain(e.target.value)}
                         rows="4"
                         cols="50"
                     />
                     <button onClick={handleSaveExplain}>Save</button>
-                    <button onClick={() => setEditing(false)}>Cancel</button>
+                    <button onClick={() => {
+                        setEditing(false);
+                        setNewExplain(currentExplain || '');
+                    }}>Cancel</button>
                 </div>
             ) : (
                 <div>
-                    <p>{explain || "No explanation provided."}</p>
-                    <button onClick={() => setEditing(true)}>Edit Explanation</button>
+                    <p>{currentExplain || "No explanation provided."}</p>
+                    <button onClick={() => {
+                        setEditing(true);
+                        setNewExplain(currentExplain || '');
+                    }}>Edit Explanation</button>
                 </div>
             )}
         </div>

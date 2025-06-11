@@ -29,7 +29,7 @@ export function SignUp() {
     return (
         <div>
             <h2>Sign Up</h2>
-            <form action="/signup" method="POST">
+            <form onSubmit={handleSignUp}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
@@ -40,9 +40,9 @@ export function SignUp() {
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" id="password" minLength={3} required name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <button type="submit" onClick={handleSignUp}>Sign Up</button>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
     );

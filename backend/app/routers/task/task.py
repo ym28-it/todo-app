@@ -16,8 +16,8 @@ async def get_tasks_by_list_id(
     list_id: uuid.UUID, db: AsyncSession = Depends(get_db)
 ):
     tasks = await task_crud.get_tasks_by_list_id(db, list_id=list_id)
-    if not tasks:
-        raise HTTPException(status_code=404, detail="No tasks found for this list")
+    if tasks is None:
+        raise HTTPException(status_code=500, detail="DB access Error")
     
     return tasks
 
