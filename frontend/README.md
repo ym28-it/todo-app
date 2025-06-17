@@ -1,28 +1,6 @@
 # フロントエンド - React + Vite
 
-このディレクトリは、ReactとViteを使用して構築されたTodoアプリケーションのフロントエンドを含みます。
-
-現在は実装途中です。
-
-## 進捗
-
-### ✅ 実装済：
-
-- アーキテクチャとディレクトリ構造が確定
-
-- Axios を使用したバックエンドAPI連携
-
-### 🔄 実装中：
-
-- Componentsの構築
-
-- Hooksによる処理ロジックとルーティング
-
-### 計画中：
-
-- Zsutandを使用した状態管理
-
-- Tailwind CSSによるUI実装
+このディレクトリは、ReactとViteを使用して構築されたTodoアプリケーションのフロントエンド
 
 ## 🛠️ 使用技術
 
@@ -33,7 +11,7 @@
 
 ## 📂 ディレクトリ構成（予定）
 
-```
+```bash
 TODO-APP\FRONTEND
 └─app
     ├─node_modules
@@ -46,14 +24,7 @@ TODO-APP\FRONTEND
         │  ├─task
         │  ├─user
         │  └─utils
-        ├─hooks
-        │  ├─task
-        │  ├─user
-        │  └─utils
-        ├─pages
-        ├─routes
-        └─store
-            └─zustand
+        └─router
 ```
 
 ## ▶️ 起動方法
@@ -70,4 +41,4 @@ docker compose up frontend
 
 テスト環境（Jest/Testing Library）の導入
 
-コンポーネントの共通化とデザイン整備
+TailwindCSSを使用したUIの改善

@@ -52,7 +52,7 @@ TODO-APP\BACKEND
 以下のコマンドで環境を構築・起動できます：
 
 ```bash
-docker-compose up backend
+docker compose up backend
 ```
 
 http://localhost:8000/docs
@@ -62,6 +62,7 @@ http://localhost:8000/docs
 ## 主なAPIエンドポイント
 
 ### ユーザー管理
+
 - `POST /users/create`：新規ユーザー作成
 - `POST /users/login`：ログイン処理
 - `GET /users/{user_id}`：ユーザー情報取得
@@ -69,12 +70,14 @@ http://localhost:8000/docs
 - `DELETE /users/{user_id}`：ユーザー削除
 
 ### リスト管理
+
 - `POST /lists/create`：リスト作成
 - `PUT /lists/{list_id}/rename`：リスト名変更
 - `PUT /lists/{list_id}/explain`：リストの説明変更
 - `DELETE /lists/{list_id}`：リスト削除
 
 ### タスク管理
+
 - `POST /tasks/create`：タスク作成
 - `PUT /tasks/{task_id}/rename`：タスク名変更
 - `PUT /tasks/{task_id}/explain`：タスク説明変更
@@ -87,11 +90,6 @@ FastAPIが提供するOpenAPIにより、以下でAPI仕様が確認できます
 
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
-
-## 🧪 テスト（今後実装予定）
-
-- pytest による自動テスト
-- CIとの統合（GitHub Actions）
 
 ## 🗃️ データベース接続情報
 
@@ -106,4 +104,3 @@ DATABASE_URL=postgresql+psycopg://user:password@db:5432/tododb
 - .envファイルで環境変数の一括管理
 - JWT認証の導入
 - ログ出力整備（ロガー）
-- APIテストの自動化
